@@ -19,6 +19,6 @@ class Http
 
     public function post(string $url)
     {
-        $this->service->request($url, 'GET');
+        $this->service->request($url, 'POST');
     }
 }
