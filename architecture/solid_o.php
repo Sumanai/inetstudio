@@ -1,17 +1,26 @@
 <?php
 
-class SomeObject {
+class SomeObject
+{
     protected $name;
 
-    public function __construct(string $name) { }
+    public function __construct(string $name)
+    {
+    }
 
-    public function getObjectName() { }
+    public function getObjectName()
+    {
+    }
 }
 
-class SomeObjectsHandler {
-    public function __construct() { }
+class SomeObjectsHandler
+{
+    public function __construct()
+    {
+    }
 
-    public function handleObjects(array $objects): array {
+    public function handleObjects(array $objects): array
+    {
         $handlers = [];
         foreach ($objects as $object) {
             if ($object->getObjectName() == 'object_1')
