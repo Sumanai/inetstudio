@@ -2,14 +2,21 @@
 
 class SomeObject
 {
-    protected $name;
+    protected string $name;
 
     public function __construct(string $name)
     {
+        $this->name = $name;
     }
 
-    public function getObjectName()
+    public function getObjectName(): string
     {
+        return $this->name;
+    }
+
+    public function getHandle(): string
+    {
+        return "handle_{$this->name}";
     }
 }
 
@@ -23,10 +30,10 @@ class SomeObjectsHandler
     {
         $handlers = [];
         foreach ($objects as $object) {
-            if ($object->getObjectName() == 'object_1')
-                $handlers[] = 'handle_object_1';
-            if ($object->getObjectName() == 'object_2')
-                $handlers[] = 'handle_object_2';
+            if (!($object instanceof SomeObject)) {
+                throw new Exception('Wrong object type');
+            }
+            $handlers[] = $object->getHandle();
         }
 
         return $handlers;
