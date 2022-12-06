@@ -1,6 +1,19 @@
 <?php
 
-class SomeObject
+interface ObjectInterface
+{
+    public function getHandle(): string;
+}
+
+abstract class AbstractObject implements ObjectInterface
+{
+    public function getHandle(): string
+    {
+        return 'handle_object_' . (string) spl_object_id($this);
+    }
+}
+
+class SomeObject extends AbstractObject
 {
     protected string $name;
 
@@ -12,11 +25,6 @@ class SomeObject
     public function getObjectName(): string
     {
         return $this->name;
-    }
-
-    public function getHandle(): string
-    {
-        return "handle_{$this->name}";
     }
 }
 
@@ -30,7 +38,8 @@ class SomeObjectsHandler
     {
         $handlers = [];
         foreach ($objects as $object) {
-            if (!($object instanceof SomeObject)) {
+            if (!($object instanceof ObjectInterface)) {
+                // TODO: Логирование вывода ошибки вместо исключения?
                 throw new Exception('Wrong object type');
             }
             $handlers[] = $object->getHandle();
