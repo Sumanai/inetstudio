@@ -1,14 +1,22 @@
 <?php
 
-class XMLHttpService extends XMLHTTPRequestService
+/**
+ * TODO: Переписать в соответствии с PSR-7
+ */
+interface HTTPRequestService
+{
+    public function request(string $url, string $method, mixed $options = null): mixed;
+}
+
+class XMLHttpService extends XMLHTTPRequestService implements HTTPRequestService
 {
 }
 
 class Http
 {
-    private $service;
+    private HTTPRequestService $service;
 
-    public function __construct(XMLHttpService $xmlHttpService)
+    public function __construct(HTTPRequestService $xmlHttpService)
     {
     }
 
